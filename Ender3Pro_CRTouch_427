@@ -134,3 +134,44 @@ probe_with_touch_mode: true
 home_xy_position: 117.5,117.5
 z_hop: 10
 z_hop_speed: 5
+
+[bed_mesh]
+speed: 120
+horizontal_move_z: 5
+mesh_min: 15, 15
+mesh_max: 185, 220
+probe_count: 5,3
+algorithm: bicubic
+
+[screws_tilt_adjust]
+screw1: 70.5,37.5
+screw1_name: front left screw
+screw2: 240,37.5
+screw2_name: front right screw
+screw3: 240,207.5
+screw3_name: rear right screw
+screw4: 70.5,207.5
+screw4_name: rear left screw
+horizontal_move_z: 10
+speed: 50
+screw_thread: CW-M4
+
+#*# <---------------------- SAVE_CONFIG ---------------------->
+#*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
+#*#
+#*# [bed_mesh default]
+#*# version = 1
+#*# points =
+#*# 	  0.062500, 0.075000, 0.100000, 0.110000, 0.062500
+#*# 	  -0.072500, -0.045000, 0.012500, 0.022500, -0.050000
+#*# 	  -0.195000, -0.190000, -0.150000, -0.157500, -0.237500
+#*# x_count = 5
+#*# y_count = 3
+#*# mesh_x_pps = 2
+#*# mesh_y_pps = 2
+#*# algo = bicubic
+#*# tension = 0.2
+#*# min_x = 15.0
+#*# max_x = 185.0
+#*# min_y = 15.0
+#*# max_y = 220.0
