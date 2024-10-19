@@ -68,7 +68,8 @@ step_pin: PB3
 dir_pin: PB4
 enable_pin: !PC3
 microsteps: 16
-rotation_distance: 33.500
+#33.5
+rotation_distance: 33.5
 nozzle_diameter: 0.400
 filament_diameter: 1.750
 heater_pin: PA1
@@ -125,7 +126,7 @@ click_pin: ^!PB2
 [bltouch]
 sensor_pin: ^PB1
 control_pin: PB0
-x_offset: -48
+x_offset: -47
 y_offset: -5
 #z_offset: 0
 probe_with_touch_mode: true
@@ -160,9 +161,9 @@ screw_thread: CW-M4
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  -0.212500, -0.337500, -0.392500, -0.335000, -0.197500
-#*# 	  -0.115000, -0.197500, -0.260000, -0.260000, -0.232500
-#*# 	  -0.190000, -0.242500, -0.277500, -0.247500, -0.230000
+#*# 	  0.297500, 0.282500, 0.285000, 0.307500, 0.285000
+#*# 	  0.455000, 0.457500, 0.435000, 0.425000, 0.370000
+#*# 	  0.350000, 0.302500, 0.297500, 0.302500, 0.302500
 #*# x_count = 5
 #*# y_count = 3
 #*# mesh_x_pps = 2
@@ -175,4 +176,4 @@ screw_thread: CW-M4
 #*# max_y = 220.0
 #*#
 #*# [bltouch]
-#*# z_offset = 1.045
+#*# z_offset = 1.315
