@@ -1,0 +1,40 @@
+Ender3 Setup - Klipper and Fluidd
+
+
+I: X/Y Offsets
+1. Affix a piece of paper to the middle of the bed big enough to cover the nozzle area and probe area
+2. Home all axis
+3. console: PROBE
+    1. Do this as often as needed to place a dot under where the probe touches the paper
+4. Console: GET_POSITION and take note of the ‘toolhead’ section. EX, toolhead: X:70.800000 Y:113.500000
+5. Using the printer controls jog the toolhead to the left until the nozzle is inline with the dot.
+6. Repeat this but move the toolhead forward on the bed.
+7. When the nozzle is directly over the dot repeat step 4
+8. For your X / Y axis subtract your new numbers from you original ones. EX, X:70.8 (original) - X:40.8 (new) = 30 etc…
+9. Edit your printer config file and under the [bltouch] heading set your x_offset to the calculated value; repeat for Y
+10. Save your config file and restart firmware/klipper
+11. DO NOT remove the paper yet
+
+II: Z offset
+1. Home all axis
+2. Do not heat the bed or nozzle, this should be done at room temperature
+3. Console: PROBE_CALIBRATE
+4. The toolhead should move to again cover the dot - once verified you can remove the tape and allow the paper to move freely
+5. A window appears to allow easy movement of the toolhead up and down
+    1. Move the head grossly at first up or down until it catches on the paper
+    2. Using smaller and smaller increments to continue adjusting the toolhead
+    3. If the paper moves freely you are too high, if it is hard to move or feels it is really catching you are too close - it should move well but also feel the drag of the toolhead on it
+6. Console: SAVE_CONFIG
+7. restart firmware/klipper
+
+III: Bed Level
+1. Measure your screw locations on your bed
+2. Home all your axis
+3. Console: SCREWS_TILT_CALCULATE
+    1. This will tell you the proper turns to adjust your bed at each corner to balance it. Repeat this process until you have it as close as you can get it
+    2. The results are in hours/minutes - so 1 hour = 360 degree turn
+
+IV: Bed mesh
+1. Home your axis
+2. console: BED_MESH_CALIBRATE
+3. When completed you want a result with as little variance as possible. If it is grossly off repeat III above
