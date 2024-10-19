@@ -63,12 +63,13 @@ position_min: -4
 position_max: 250
 
 [extruder]
-max_extrude_only_distance: 100.0
+max_extrude_only_distance: 101.0
 step_pin: PB3
 dir_pin: PB4
 enable_pin: !PC3
 microsteps: 16
-rotation_distance: 33.500
+#32.5017
+rotation_distance: 32.7
 nozzle_diameter: 0.400
 filament_diameter: 1.750
 heater_pin: PA1
@@ -80,8 +81,7 @@ pid_Ki: 1.063
 pid_Kd: 108.982
 min_temp: 0
 max_temp: 250
-# .762 (1.5")
-#hopressure_advance: 0.254
+pressure_advance: 0.06
 
 [heater_bed]
 heater_pin: PA2
@@ -125,7 +125,7 @@ click_pin: ^!PB2
 [bltouch]
 sensor_pin: ^PB1
 control_pin: PB0
-x_offset: -45
+x_offset: -47
 y_offset: -4
 #z_offset: 0
 probe_with_touch_mode: true
@@ -160,9 +160,9 @@ screw_thread: CW-M4
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	  0.115000, -0.020000, -0.050000, -0.055000, 0.017500
-#*# 	  0.167500, 0.032500, -0.040000, -0.082500, -0.082500
-#*# 	  0.180000, 0.077500, 0.010000, -0.025000, -0.020000
+#*# 	  -0.042500, -0.122500, -0.137500, -0.102500, -0.022500
+#*# 	  -0.150000, -0.217500, -0.250000, -0.215000, -0.205000
+#*# 	  -0.067500, -0.110000, -0.197500, -0.160000, -0.120000
 #*# x_count = 5
 #*# y_count = 3
 #*# mesh_x_pps = 2
@@ -175,4 +175,4 @@ screw_thread: CW-M4
 #*# max_y = 220.0
 #*#
 #*# [bltouch]
-#*# z_offset = 1.310
+#*# z_offset = 1.260
