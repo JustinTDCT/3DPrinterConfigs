@@ -41,5 +41,5 @@ IV: Bed mesh
 3. When completed you want a result with as little variance as possible. If it is grossly off repeat III above
 
 V: PID
-1. Tool PID_CALIBRATE HEATER=extruder TARGET=245
-2. Bed PID_CALIBRATE HEATER=heater_bed TARGET=90
+1. Tool PID_CALIBRATE HEATER=extruder TARGET=170
+2. Bed PID_CALIBRATE HEATER=heater_bed TARGET=60
