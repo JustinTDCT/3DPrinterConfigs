@@ -36,6 +36,7 @@ III: Bed Level
     1. This will tell you the proper turns to adjust your bed at each corner to balance it. Repeat this process until you have it as close as you can get it
     2. The results are in hours/minutes - so 1 hour = 360 degree turn
     3. You may have to adjust your max X to 245
+5. If not doing a new mesh redo you Z offset now; if doing a new mesh redo Z offset when that is done
 
 IV: Bed mesh
 1. Home your axis
