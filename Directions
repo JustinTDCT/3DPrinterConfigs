@@ -26,6 +26,7 @@ II: Z offset
     3. If the paper moves freely you are too high, if it is hard to move or feels it is really catching you are too close - it should move well but also feel the drag of the toolhead on it
 6. Console: SAVE_CONFIG
 7. restart firmware/klipper
+8. Now that you have this done, check for consistency: PROBE_ACCURACY
 
 III: Bed Level
 1. Measure your screw locations on your bed
