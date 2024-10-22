@@ -35,6 +35,7 @@ III: Bed Level
 4. Console: SCREWS_TILT_CALCULATE
     1. This will tell you the proper turns to adjust your bed at each corner to balance it. Repeat this process until you have it as close as you can get it
     2. The results are in hours/minutes - so 1 hour = 360 degree turn
+    3. You may have to adjust your max X to 245
 
 IV: Bed mesh
 1. Home your axis
@@ -42,5 +43,13 @@ IV: Bed mesh
 3. When completed you want a result with as little variance as possible. If it is grossly off repeat III above
 
 V: PID
-1. Tool PID_CALIBRATE HEATER=extruder TARGET=170
-2. Bed PID_CALIBRATE HEATER=heater_bed TARGET=60
+1. Tool PID_CALIBRATE HEATER=extruder TARGET=<norm print temp>
+2. Bed PID_CALIBRATE HEATER=heater_bed TARGET=<norm bed temp>
+
+VI: Extruder Calibration
+1. Mark filament @ 120mm from feeder
+2. In [extruder] section of klipper printer.cfg set max_extrude_only_distance to 101+
+2. Heat to temp then extrude 100mm @ 1s
+3. Measure what is left, subtract that from 120 (IE if 21mm remain, 120-21)
+4. <new_rotation_distance> = <previous_rotation_distance> * ( <actual_extrude_distance> / 100 ); EX - <old> 33.5 * 99 / 100 = 33.165
+
