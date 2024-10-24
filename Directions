@@ -27,6 +27,7 @@ II: Z offset
 6. Console: SAVE_CONFIG
 7. restart firmware/klipper
 8. Now that you have this done, check for consistency: PROBE_ACCURACY
+9. A difference of 0.0125 is normal; if more than 0.025 then something needs to review this is too high
 
 III: Bed Level
 1. Measure your screw locations on your bed
