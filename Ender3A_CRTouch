@@ -69,28 +69,28 @@ dir_pin: PB4
 enable_pin: !PC3
 microsteps: 16
 #32.5017
-rotation_distance: 32.7
+rotation_distance: 32.05
 nozzle_diameter: 0.400
 filament_diameter: 1.750
 heater_pin: PA1
 sensor_type: EPCOS 100K B57560G104F
 sensor_pin: PC5
-control: pid
-pid_Kp: 21.527
-pid_Ki: 1.063
-pid_Kd: 108.982
+#control: pid
+#pid_Kp: 21.527
+#pid_Ki: 1.063
+#pid_Kd: 108.982
 min_temp: 0
 max_temp: 250
-pressure_advance: 0.06
+pressure_advance: 0.105
 
 [heater_bed]
 heater_pin: PA2
 sensor_type: EPCOS 100K B57560G104F
 sensor_pin: PC4
-control: pid
-pid_Kp: 54.027
-pid_Ki: 0.770
-pid_Kd: 948.182
+#control: pid
+#pid_Kp: 54.027
+#pid_Ki: 0.770
+#pid_Kd: 948.182
 min_temp: 0
 max_temp: 130
 
@@ -104,7 +104,7 @@ restart_method: command
 [printer]
 kinematics: cartesian
 max_velocity: 300
-max_accel: 3000
+max_accel: 3500
 max_z_velocity: 5
 max_z_accel: 100
 
@@ -154,15 +154,90 @@ screw4: 74,217
 screw4_name: rear left screw
 screw_thread: CW-M4
 
+[input_shaper]
+shaper_freq_x: 27.57  # frequency for the X mark of the test model
+shaper_freq_y: 27.78  # frequency for the Y mark of the test model
+shaper_type: mzv
+#max_accel: 2100
+
+[include timelapse.cfg]
+
+[gcode_macro START_PRINT]
+gcode:
+    #{% set BED_TEMP = params.BED_TEMP|default(60)|float %}
+    #{% set EXTRUDER_TEMP = params.EXTRUDER_TEMP|default(190)|float %}
+    {% set BED_TEMP = params.BED_TEMP|float %}
+    {% set EXTRUDER_TEMP = params.EXTRUDER_TEMP|float %}
+    # pre-heat extruder part way to reduce wait time
+    M104 S170
+    # Heat bed for probing
+    M190 S{BED_TEMP}
+    # Use absolute coordinates
+    G90
+    # Home the printer
+    G28
+    # If you are using QGL:
+    #QUAD_GANTRY_LEVEL
+    #G28 Z
+    # If you are using Z-Tilt:
+    #Z_TILT_ADJUST
+    # If you are generating a new bed mesh:
+    BED_MESH_CALIBRATE ADAPTIVE=1
+    ## NOTE:    The adaptive meshing feature requires exclude_object     ##
+    ##      and may require 'Label Objects' to be enabled in the slicer  ##
+    ##           To mesh without it just use BED_MESH_CALIBRATE          ##
+    # If you are loading an existing mesh:
+    #BED_MESH_PROFILE LOAD=default
+    # Move the nozzle near the bed
+    G1 Z5 F3000
+    # Set and wait for nozzle to reach printing temperature
+    M109 S{EXTRUDER_TEMP}
+    # Start printing!
+[gcode_macro PRINT_START]
+gcode:
+    START_PRINT {rawparams}
+# Enable exclude_object for adaptive meshing
+[exclude_object]
+
+[gcode_macro END_PRINT]
+gcode:
+    # Turn off bed, extruder, and fan
+    M140 S0
+    M104 S0
+    M106 S0
+    # Move nozzle away from print while retracting
+    G91
+    G1 X-2 Y-2 E-3 F300
+    # Raise nozzle by 10mm
+    G1 Z10 F3000
+    G90
+    # Disable steppers
+    M84
+[gcode_macro M600]
+gcode:
+    {% set X = params.X|default(50)|float %}
+    {% set Y = params.Y|default(0)|float %}
+    {% set Z = params.Z|default(10)|float %}
+    SAVE_GCODE_STATE NAME=M600_state
+    PAUSE_BASE
+    G91
+    G1 E-.8 F2700
+    G1 Z{Z}
+    G90
+    G1 X{X} Y{Y} F3000
+    G91
+    G1 E-50 F1000
+    RESTORE_GCODE_STATE NAME=M600_state
+
 #*# <---------------------- SAVE_CONFIG ---------------------->
 #*# DO NOT EDIT THIS BLOCK OR BELOW. The contents are auto-generated.
 #*#
 #*# [bed_mesh default]
 #*# version = 1
 #*# points =
-#*# 	0.142500, 0.067500, 0.055000, 0.087500, 0.147500
-#*# 	0.062500, -0.002500, -0.027500, -0.002500, -0.005000
-#*# 	0.125000, 0.095000, 0.007500, 0.042500, 0.067500
+#*# 	0.077500, 0.057500, 0.097500, 0.175000, 0.275000
+#*# 	-0.012500, -0.007500, 0.030000, 0.110000, 0.145000
+#*# 	0.050000, 0.085000, 0.067500, 0.150000, 0.215000
 #*# x_count = 5
 #*# y_count = 3
 #*# mesh_x_pps = 2
@@ -174,5 +249,17 @@ screw_thread: CW-M4
 #*# min_y = 15.0
 #*# max_y = 220.0
 #*#
+#*# [extruder]
+#*# control = pid
+#*# pid_kp = 25.780
+#*# pid_ki = 1.292
+#*# pid_kd = 128.580
+#*#
+#*# [heater_bed]
+#*# control = pid
+#*# pid_kp = 74.299
+#*# pid_ki = 1.598
+#*# pid_kd = 863.721
+#*#
 #*# [bltouch]
-#*# z_offset = 1.325
+#*# z_offset = 1.510
